@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Title of the document</title>
+<style>
+* {
+	box-sizing: border-box;
+}
+
+input:focus, select:focus, textarea:focus, button:focus {
+	outline: none;
+}
+
+.column {
+	float: left;
+	width: 50%;
+	padding: 10px;
+	/* height: 300px;  */
+}
+
+.row:after {
+	content: "";
+	display: table;
+	clear: both;
+}
+</style>
+</head>
+
+<body>
+
+	<form action="http://localhost:8080/create/payment" method="Post"  th:object="${detail}"
+		onsubmit="return validateForm()">
+
+		<div class="row"
+			style="max-height: fit-content; border: 1px solid; width: 80%; margin: auto; height: -webkit-fill-available; padding: 60px;">
+			<div class="column">
+				<div>Shipping Address</div>
+				<br>
+				<div>
+					FirstName:<input name="firstname" contenteditable="true" type="text" value="Jane">
+				</div>
+				<div>LastName:<input name="lastname" contenteditable="true" type="text" value="Doe"></div>
+				
+				<div>
+					First Address:<input contenteditable="true" type="text"
+						name="address1" value="P.O. Box 7004">
+				</div>
+				<div>
+					Second Address:<input contenteditable="true" type="text"
+						name="address2" value="123 Nowhere Anywhere St., Apt. 542">
+				</div>
+				
+				<div>
+					City:<input contenteditable="true" type="text"
+						name="city" value="Omaha">
+				</div>
+				<div>
+					State:<input contenteditable="true" type="text"
+						name="state" value="NE">
+				</div>
+								
+				<div>
+					Zipcode:
+					<input id="zip" contenteditable="true" type="text"
+						name="zipcode" value="68114">
+				</div>
+			</div>
+			<div class="column">
+				<div>Shipping Method</div>
+				<br> <br>
+				<div >Standard</div>
+				<div >Delivery in 3-5 business days
+					following shipment</div>
+			</div>
+		</div>
+
+
+		<div class="row" id="productinfo" style="width: 80%; margin: auto">
+
+			<div style="width: 20%; float: left; padding: 10px">
+				<h3 style="background-color: oldlace;">ITEMS</h3>
+				<br> <br>
+				<div>
+					<img style="width: 84%; height: 100%;"
+						src="../static/img/cycle1.jpg">
+				</div>
+			</div>
+			<div style="width: 20%; float: left; padding: 10px">
+				<h3 style="background-color: oldlace;">DETAILS</h3>
+				<br> <br>
+				<div>
+					<textarea name="description" contenteditable="true" rows="7" cols="23">
+                     offroad cycle to be driven 
+                     by employee of paypal.		
+                     Item #. 123456789
+				</textarea>
+				</div>
+			</div>
+			<div style="width: 20%; float: left; padding: 10px">
+				<h3 style="background-color: oldlace;">PRICE</h3>
+				<br> <br>
+				<div contenteditable="true">
+					<input name="price" contenteditable="true" type="text" value="$300">
+				</div>
+			</div>
+			<div style="width: 20%; float: left; padding: 10px">
+				<h3 style="background-color: oldlace;">QTY</h3>
+				<br> <br>
+				<div contenteditable="true">
+					<input name="quantity" contenteditable="true" type="text" value="1">
+				</div>
+			</div>
+			<div style="width: 20%; float: left; padding: 10px">
+				<h3 style="background-color: oldlace;">TOTALS</h3>
+				<br> <br>
+				<div contenteditable="true">
+					<input name ="total" contenteditable="true" type="text" value="$300">
+				</div>
+			</div>
+
+		</div>
+
+		<div style="border: 1px solid; width: 80%; margin: auto;"></div>
+
+		<div style="float: right; width: 17%">
+			<span style="margin: 15px 129px 0px -127px;">Shipping</span> <span
+				contenteditable="true">$20</span>
+		</div>
+		<br>
+		<div style="float: right; width: 17%">
+			<span style="margin: 15px 164px 0px -127px;">Tax</span> <span
+				contenteditable="true">$30</span>
+		</div>
+		<br>
+		<div style="float: right; width: 17%">
+			<span style="margin: 15px 111px 0px -127px;">Order total</span> 
+			<input style="width:30%; " name="ordertotal" contenteditable="true" type="text" value="350">
+
+		</div>
+		<br> <br>
+		<div style="float: right; width: 27%">
+			<input type="submit" value="Proceed to Payment">
+
+		</div>
+	</form>
+	<script>
+		function validateForm() {
+			var zipcode = document.getElementById("zip").value;
+			var isValidZip = /(^\d{5}$)|(^\d{5}-\d{4}$)/.test(zipcode);
+			if (!isValidZip) {
+				alert("Enter a valid zip code");
+				return false;
+			}
+         return true;
+		}
+	</script>
+
+</body>
+</html>
